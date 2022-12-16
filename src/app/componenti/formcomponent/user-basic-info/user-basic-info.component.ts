@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormGroupDirective } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective,  Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-basic-info',
@@ -14,6 +14,7 @@ formBasic!: FormGroup
   ngOnInit(): void {
     this.formBasic = this.rootFormGroup.control.get(this.formGroupName) as FormGroup
     console.log(this.formBasic);
+
 
 
   }

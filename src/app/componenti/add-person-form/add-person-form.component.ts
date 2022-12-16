@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 
@@ -16,20 +17,20 @@ export class AddPersonFormComponent implements OnInit {
 
     this.userForm = this.fb.group({
       basicInfo: this.fb.group({
-        firstName: [],
-        lastName: [],
-        email: []
+        firstName: ['', Validators.required ],
+        lastName: ['', Validators.required ],
+        email: ['',  Validators.required]
       }),
       detailsInfo: this.fb.group({
-        dateBirth: [],
-        genre: [],
-        city: [],
-        district: [],
-        address: []
+        dateBirth: ['', Validators.required ],
+        genre: [''],
+        city: [null],
+        district: [null],
+        address: [null]
       }),
       passwordRequest: this.fb.group({
-        password: [],
-        confirmPassword: []
+        password: ['', Validators.required],
+        confirmPassword: ['', Validators.required ]
       })
 
     });
