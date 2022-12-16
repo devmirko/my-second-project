@@ -1,0 +1,24 @@
+<div class="form-wrapper">
+  <ng-container  [formGroup]="userForm">
+    <!-- nome, cognome, email  -->
+    <app-user-basic-info formGroupName="basicInfo"></app-user-basic-info>
+    <!--   -->
+
+    <!-- data, genere, comune, provincia, indirizzo -->
+    <app-user-detail-info formGroupName="detailsInfo" ></app-user-detail-info>
+    <!--  -->
+
+
+    <!-- password -->
+    <app-user-password-info formGroupName="passwordRequest"></app-user-password-info>
+    <!--  -->
+
+  </ng-container>
+
+
+  <pre style="margin-top:50px; border: 1px solid red; width: fit-content">
+    {{userForm.value | json}}
+  </pre>
+
+
+</div>

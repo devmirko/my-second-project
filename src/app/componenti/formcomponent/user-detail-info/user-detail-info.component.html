@@ -1,0 +1,54 @@
+<ng-container [formGroup]="formDetails">
+  <mat-card class="form-container">
+    <mat-card-title>Dettagli Utente</mat-card-title>
+
+    <!-- Date Birth -->
+    <mat-form-field appearance="fill">
+      <mat-label>Inserisci la Data di Nascita</mat-label>
+      <input matInput placeholder="MM/DD/YYYY"  formControlName="dateBirth" />
+      <!-- integrare datepicker -->
+      <!-- <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker> -->
+    </mat-form-field>
+    <!-- / Date  Birth -->
+
+    <!-- Select gender -->
+    <mat-form-field appearance="fill">
+      <mat-label>Genere</mat-label>
+      <select matNativeControl formControlName="genre" >
+        <option value="Man">Uomo</option>
+        <option value="Woman">Donna</option>
+      </select>
+    </mat-form-field>
+    <!-- /Select gender -->
+
+
+    <!-- City  ​​of residence  -->
+    <mat-form-field>
+      <mat-label>Comune di residenza</mat-label>
+      <input matInput placeholder="Ex. Bologna,Torino" formControlName="city"/>
+    </mat-form-field>
+    <!-- /City  ​​of residence -->
+
+    <!-- District -->
+    <mat-form-field appearance="fill">
+      <mat-label>Provincia</mat-label>
+      <select matNativeControl formControlName="district">
+        <option value="Bari">Bari</option>
+        <option value="Modena">Modena</option>
+        <option value="Torino">Torino</option>
+        <option value="Milano">Milano</option>
+      </select>
+    </mat-form-field>
+    <!-- /District -->
+
+
+    <!-- Address -->
+    <mat-form-field>
+      <mat-label>Indirizzo</mat-label>
+      <input matInput placeholder="Ex. Via Panni"  formControlName="address"  />
+    </mat-form-field>
+    <!-- /Company -->
+  </mat-card>
+</ng-container>
