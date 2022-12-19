@@ -10,17 +10,13 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 export class AddPersonFormComponent implements OnInit {
 
   userForm! : FormGroup;
-
+  validationBasicInfo! : FormGroup;
   constructor(private fb: FormBuilder){}
 
   ngOnInit(): void {
 
     this.userForm = this.fb.group({
-      basicInfo: this.fb.group({
-        firstName: ['', Validators.required ],
-        lastName: ['', Validators.required ],
-        email: ['',  Validators.required]
-      }),
+      basicInfo: this.validationBasicInfo,
       detailsInfo: this.fb.group({
         dateBirth: ['', Validators.required ],
         genre: [''],
@@ -34,6 +30,14 @@ export class AddPersonFormComponent implements OnInit {
       })
 
     });
+
+  }
+
+
+  RiceviValidazione(value : FormGroup){
+  this.validationBasicInfo = value
+  console.log("validazione finale");
+  console.log(this.validationBasicInfo);
 
   }
 

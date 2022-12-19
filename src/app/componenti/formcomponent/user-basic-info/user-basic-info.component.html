@@ -7,6 +7,7 @@
       <mat-label>First name</mat-label>
       <input matInput placeholder="Ex. Jane" formControlName="firstName" />
     </mat-form-field>
+    <p *ngIf="!formBasic.get('firstName')?.valid && formBasic.get('firstName')?.touched">Inserisci il tuo nome</p>
     <!-- /First name -->
 
     <!-- Last name -->
@@ -14,6 +15,7 @@
       <mat-label>Last name</mat-label>
       <input matInput placeholder="Ex. Doe" formControlName="lastName" />
     </mat-form-field>
+    <p *ngIf="!formBasic.get('lastName')?.valid && formBasic.get('lastName')?.touched">Inserisci il tuo cognome</p>
     <!-- /Last name -->
 
     <!-- email -->
@@ -21,6 +23,7 @@
       <mat-label>e-mail</mat-label>
       <input matInput type="email" matInput placeholder="Ex. jane@doe.com" formControlName="email"/>
     </mat-form-field>
+    <p *ngIf="!formBasic.get('email')?.valid && formBasic.get('email')?.touched">Inserisci il tuo cognome</p>
     <!-- /email -->
 
   </mat-card>

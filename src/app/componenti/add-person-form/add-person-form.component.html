@@ -1,13 +1,13 @@
 <div class="form-wrapper">
   <ng-container  [formGroup]="userForm">
     <!-- nome, cognome, email  -->
-    <app-user-basic-info formGroupName="basicInfo"></app-user-basic-info>
+    <app-user-basic-info formGroupName="basicInfo" (Validazione)="RiceviValidazione($event)"></app-user-basic-info>
     <!--   -->
-
+    <div *ngIf="validationBasicInfo.valid">
     <!-- data, genere, comune, provincia, indirizzo -->
-    <app-user-detail-info formGroupName="detailsInfo" ></app-user-detail-info>
+      <app-user-detail-info formGroupName="detailsInfo" ></app-user-detail-info>
     <!--  -->
-
+    </div>
 
     <!-- password -->
     <app-user-password-info formGroupName="passwordRequest"></app-user-password-info>
@@ -18,6 +18,7 @@
 
   <pre style="margin-top:50px; border: 1px solid red; width: fit-content">
     {{userForm.value | json}}
+    {{validationBasicInfo.value | json}}
   </pre>
 
 
