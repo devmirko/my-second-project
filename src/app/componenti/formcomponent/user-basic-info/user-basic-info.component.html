@@ -7,7 +7,14 @@
       <mat-label>First name</mat-label>
       <input matInput placeholder="Ex. Jane" formControlName="firstName" />
     </mat-form-field>
-    <p *ngIf="!formBasic.get('firstName')?.valid && formBasic.get('firstName')?.touched">Inserisci il tuo nome</p>
+
+    <!-- errori -->
+    <div *ngIf="formBasic.get('firstName')?.invalid && formBasic.get('firstName')?.touched" >
+      <p *ngIf="formBasic.get('firstName')?.errors?.['required']">Inserisci il Nome</p>
+      <p *ngIf="formBasic.get('firstName')?.errors?.['minlength']">Deve contenere almeno 2 lettere</p>
+      <p *ngIf="formBasic.get('firstName')?.errors?.['noSpaceAllowed']">Non puo contenere spazi</p>
+    </div>
+
     <!-- /First name -->
 
     <!-- Last name -->
@@ -15,16 +22,30 @@
       <mat-label>Last name</mat-label>
       <input matInput placeholder="Ex. Doe" formControlName="lastName" />
     </mat-form-field>
-    <p *ngIf="!formBasic.get('lastName')?.valid && formBasic.get('lastName')?.touched">Inserisci il tuo cognome</p>
+
+    <!-- errori -->
+    <div *ngIf="formBasic.get('lastName')?.invalid && formBasic.get('lastName')?.touched" >
+      <p *ngIf="formBasic.get('lastName')?.errors?.['required']">Inserisci il cognome</p>
+      <p *ngIf="formBasic.get('lastName')?.errors?.['minlength']">Deve contenere almeno 2 lettere</p>
+    </div>
+
     <!-- /Last name -->
+
+
 
     <!-- email -->
     <mat-form-field>
       <mat-label>e-mail</mat-label>
       <input matInput type="email" matInput placeholder="Ex. jane@doe.com" formControlName="email"/>
     </mat-form-field>
-    <p *ngIf="!formBasic.get('email')?.valid && formBasic.get('email')?.touched">Inserisci il tuo cognome</p>
+
+     <!-- errori -->
+     <div *ngIf="formBasic.get('email')?.invalid && formBasic.get('email')?.touched" >
+      <p *ngIf="formBasic.get('email')?.errors?.['required']">Inserisci email</p>
+      <p *ngIf="formBasic.get('email')?.errors?.['email']">l'email non e valida</p>
+    </div>
     <!-- /email -->
 
   </mat-card>
 </ng-container>
+

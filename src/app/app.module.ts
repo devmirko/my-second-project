@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { UserDetailInfoComponent } from './componenti/formcomponent/user-detail-
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 import { UserPasswordInfoComponent } from './componenti/formcomponent/user-password-info/user-password-info.component';
+import {MatNativeDateModule} from '@angular/material/core';
 
 
 
@@ -41,6 +43,7 @@ import { UserPasswordInfoComponent } from './componenti/formcomponent/user-passw
     UserBasicInfoComponent,
     UserDetailInfoComponent,
     UserPasswordInfoComponent,
+
 
 
   ],
@@ -60,7 +63,10 @@ import { UserPasswordInfoComponent } from './componenti/formcomponent/user-passw
     MatCardModule,
     CommonModule,
     MatDatepickerModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule,
+    MatNativeDateModule
+
 
   ],
   providers: [],

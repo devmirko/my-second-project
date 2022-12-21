@@ -3,14 +3,22 @@
     <mat-card-title>Dettagli Utente</mat-card-title>
 
     <!-- Date Birth -->
-    <mat-form-field appearance="fill">
-      <mat-label>Inserisci la Data di Nascita</mat-label>
-      <input matInput placeholder="MM/DD/YYYY"  formControlName="dateBirth" />
-      <!-- integrare datepicker -->
-      <!-- <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker> -->
+    <mat-form-field >
+      <input
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Choose a date"
+        #pickerInput
+        formControlName="dateBirth"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+
+    <div *ngIf="formDetails.get('dateBirth')?.invalid && formDetails.get('dateBirth')?.touched" >
+      <p *ngIf="formDetails.get('dateBirth')?.errors?.['required']">Inserisci la data</p>
+      <p *ngIf="formDetails.get('dateBirth')?.errors?.['invalid']">Devi essere maggiorenne</p>
+    </div>
     <!-- / Date  Birth -->
 
     <!-- Select gender -->

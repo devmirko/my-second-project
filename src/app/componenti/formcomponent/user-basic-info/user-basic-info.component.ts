@@ -17,9 +17,9 @@ formBasic!: FormGroup
 
 
     this.formBasic = this.fb.group({
-        firstName: ['', Validators.required ],
-        lastName: ['', Validators.required ],
-        email: ['',  Validators.required]
+      firstName: ['', [Validators.required, Validators.minLength(2), this.ControlString]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['',  [Validators.required, Validators.email]]
       });
 
       this.MandaValidazione()
@@ -30,6 +30,15 @@ formBasic!: FormGroup
 
   MandaValidazione(){
     this.Validazione.emit(this.formBasic)
+  }
+
+
+  ControlString(control : FormControl){
+    if(control.value != null && control.value.indexOf('') != -1 ){
+      return {noSpaceAllowed : true}
+    }
+
+    return null
   }
 
 }

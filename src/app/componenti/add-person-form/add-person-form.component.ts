@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-add-person-form',
@@ -11,34 +12,81 @@ export class AddPersonFormComponent implements OnInit {
 
   userForm! : FormGroup;
   validationBasicInfo! : FormGroup;
-  constructor(private fb: FormBuilder){}
+  validationDetails! : FormGroup;
+  validationPassword! : FormGroup;
+  status = true
+
+
+  constructor(private fb: FormBuilder, private firebase : FirebaseService){}
 
   ngOnInit(): void {
 
-    this.userForm = this.fb.group({
-      basicInfo: this.validationBasicInfo,
-      detailsInfo: this.fb.group({
-        dateBirth: ['', Validators.required ],
-        genre: [''],
-        city: [null],
-        district: [null],
-        address: [null]
+    this.userForm = new FormGroup({
+      basicInfo : new FormGroup({
+        firstName: new FormControl(''),
+        lastName:  new FormControl(''),
+        email:  new FormControl('')
       }),
-      passwordRequest: this.fb.group({
-        password: ['', Validators.required],
-        confirmPassword: ['', Validators.required ]
-      })
+      detailsInfo : new FormGroup({
+        dateBirth:  new FormControl(''),
+        genre:  new FormControl(''),
+        city:  new FormControl(''),
+        district:  new FormControl(''),
+        address:  new FormControl(''),
+      }),
+      passwordRequest : new FormGroup({
+        password: new FormControl(''),
+        confirmPassword: new FormControl(''),
+      }),
 
-    });
+    })
+
+  }
+
+
+  onUpdate(){
+    if (this.validationBasicInfo.valid &&
+      this.validationDetails.valid     &&
+      this.validationPassword) {
+
+        this.firebase.insertPersona(this.firebase.urlPerson + '.json', {
+          basicInfo: this.validationBasicInfo.value,
+          detailsInfo: this.validationDetails.value,
+          passwordRequest: this.validationPassword.value
+        }).subscribe((data) => {
+          console.log(data);
+
+        });
+
+        this.status = true
+
+    } else {
+      this.status = false
+      console.log("non tutti i campi sono corretti");
+
+    }
+
 
   }
 
 
   RiceviValidazione(value : FormGroup){
   this.validationBasicInfo = value
-  console.log("validazione finale");
-  console.log(this.validationBasicInfo);
+  // console.log("validazione finale");
+  // console.log(this.validationBasicInfo);
 
+  }
+
+  RiceviValidazioneDetails(value : FormGroup){
+    this.validationDetails = value
+    // console.log("validazione finale");
+    // console.log(this.validationDetails);
+  }
+
+  RiceviValidazionePassword(value : FormGroup){
+    this.validationPassword = value
+    // console.log("validazione finale");
+    // console.log(this.validationPassword);
   }
 
 }
