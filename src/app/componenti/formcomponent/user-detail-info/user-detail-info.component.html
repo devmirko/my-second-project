@@ -29,6 +29,11 @@
         <option value="Woman">Donna</option>
       </select>
     </mat-form-field>
+
+
+    <div *ngIf="formDetails.get('genre')?.invalid && formDetails.get('genre')?.touched" >
+      <p *ngIf="formDetails.get('genre')?.errors?.['required']">Inserisci il sesso</p>
+    </div>
     <!-- /Select gender -->
 
 
@@ -42,12 +47,11 @@
     <!-- District -->
     <mat-form-field appearance="fill">
       <mat-label>Provincia</mat-label>
-      <select matNativeControl formControlName="district">
-        <option value="Bari">Bari</option>
-        <option value="Modena">Modena</option>
-        <option value="Torino">Torino</option>
-        <option value="Milano">Milano</option>
-      </select>
+      <mat-select formControlName="district">
+        <mat-option *ngFor="let provincie of ProvincieItaliane" [value]="provincie">
+          {{provincie}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <!-- /District -->
 
@@ -55,8 +59,8 @@
     <!-- Address -->
     <mat-form-field>
       <mat-label>Indirizzo</mat-label>
-      <input matInput placeholder="Ex. Via Panni"  formControlName="address"  />
+      <input matInput placeholder="Ex. Via Panni"  formControlName="address" />
     </mat-form-field>
-    <!-- /Company -->
+    <!-- /Address -->
   </mat-card>
 </ng-container>

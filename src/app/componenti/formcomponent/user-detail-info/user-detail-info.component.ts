@@ -1,6 +1,7 @@
 import { Component, Input, Output,OnInit, EventEmitter, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { DistrictService } from 'src/app/services/district.service';
 
 @Component({
   selector: 'app-user-detail-info',
@@ -11,7 +12,10 @@ export class UserDetailInfoComponent implements OnInit {
 @Input() formGroupName!: string
 @Output() validationDetails = new EventEmitter();
 formDetails!: FormGroup
-constructor(private rootFormGroup: FormGroupDirective, private fb: FormBuilder) {}
+ProvincieItaliane: any
+constructor(private rootFormGroup: FormGroupDirective, private fb: FormBuilder, private provincie: DistrictService) {
+  this.ProvincieItaliane = this.provincie.getProvincie()
+}
 
 ngOnInit(): void {
   this.formDetails = this.rootFormGroup.control.get(this.formGroupName) as FormGroup
@@ -20,14 +24,10 @@ ngOnInit(): void {
   this.formDetails = this.fb.group({
     dateBirth: [moment(), [Validators.required, this.ControlDate]],
     genre: ['', Validators.required],
-    city: [null],
-    district: [null],
+    city: [''],
+    district: [''],
     address: [null]
   });
-
-
-
-
 
 
   this.MandaValidazione()

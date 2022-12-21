@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter,  OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupDirective, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-password-info',
@@ -18,12 +18,40 @@ ngOnInit(): void {
 
   this.formPassword = this.fb.group({
     password: ['', [Validators.required,]],
-    confirmPassword: ['', [Validators.required] ]
-  });
+    confirmPassword: ['', [Validators.required]]
+  },
+  {
+    validators:this.Mustmatch('password','confirmPassword')
+  }
+  );
 
   this.MandaValidazione()
 
 
+}
+
+get password() { return this.formPassword.get('password'); }
+
+get confirmPassword() { return this.formPassword.get('confirmPassword'); }
+
+
+
+Mustmatch(password:any ,confirmPassword: any ) {
+  return (formgroup: FormGroup) => {
+    const passwordcontrol = formgroup.controls[password];
+    const confirmPasswordcontrol = formgroup.controls[confirmPassword];
+
+    if(confirmPasswordcontrol.errors && !confirmPasswordcontrol.errors['Mustmatch'] ){
+      return;
+    }
+
+    if (passwordcontrol.value !== confirmPasswordcontrol.value ) {
+      confirmPasswordcontrol.setErrors({Mustmatch: true})
+    } else {
+      confirmPasswordcontrol.setErrors(null)
+    }
+
+  };
 }
 
 MandaValidazione(){
@@ -31,3 +59,11 @@ MandaValidazione(){
 }
 
 }
+
+
+
+
+
+
+
+
