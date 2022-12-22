@@ -41,13 +41,22 @@ export class AddPersonFormComponent implements OnInit {
 
     })
 
+
+
+
+
+
   }
 
 
   onUpdate(){
+
+   console.log( this.validationBasicInfo.controls['firstName'].value);
+
+
     if (this.validationBasicInfo.valid &&
       this.validationDetails.valid     &&
-      this.validationPassword) {
+      this.validationPassword.valid) {
 
         this.firebase.insertPersona(this.firebase.urlPerson + '.json', {
           basicInfo: this.validationBasicInfo.value,
@@ -72,21 +81,25 @@ export class AddPersonFormComponent implements OnInit {
 
   RiceviValidazione(value : FormGroup){
   this.validationBasicInfo = value
-  // console.log("validazione finale");
-  // console.log(this.validationBasicInfo);
+
 
   }
 
   RiceviValidazioneDetails(value : FormGroup){
     this.validationDetails = value
-    // console.log("validazione finale");
-    // console.log(this.validationDetails);
+
   }
 
   RiceviValidazionePassword(value : FormGroup){
     this.validationPassword = value
-    // console.log("validazione finale");
-    // console.log(this.validationPassword);
+
+  }
+
+
+  setForm(){
+    this.userForm.setValue({
+
+    })
   }
 
 }

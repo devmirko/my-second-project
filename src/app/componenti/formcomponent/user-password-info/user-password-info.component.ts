@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter,  OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupDirective,  Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-password-info',

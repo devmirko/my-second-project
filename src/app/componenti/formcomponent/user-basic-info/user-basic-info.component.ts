@@ -17,7 +17,7 @@ formBasic!: FormGroup
 
 
     this.formBasic = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2), this.ControlString]],
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['',  [Validators.required, Validators.email]]
       });
@@ -33,12 +33,6 @@ formBasic!: FormGroup
   }
 
 
-  ControlString(control : FormControl){
-    if(control.value != null && control.value.indexOf('') != -1 ){
-      return {noSpaceAllowed : true}
-    }
 
-    return null
-  }
 
 }

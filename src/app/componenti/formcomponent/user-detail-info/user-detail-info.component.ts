@@ -51,16 +51,6 @@ ControlDate( control: FormControl ){
 
 
 
-
-
-
-
-
-
-
-
-
-
 MandaValidazione(){
   this.validationDetails.emit(this.formDetails)
 }
