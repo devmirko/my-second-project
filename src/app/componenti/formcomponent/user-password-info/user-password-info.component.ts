@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter,  OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective,  Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-password-info',
@@ -8,7 +8,6 @@ import { FormBuilder, FormGroup, FormGroupDirective,  Validators } from '@angula
 })
 export class UserPasswordInfoComponent implements OnInit {
 @Input() formGroupName!: string
-@Output() validationPassword = new EventEmitter()
 formPassword!: FormGroup
 constructor(private rootFormGroup: FormGroupDirective, private fb: FormBuilder) {}
 
@@ -16,16 +15,20 @@ ngOnInit(): void {
   this.formPassword = this.rootFormGroup.control.get(this.formGroupName) as FormGroup
   console.log(this.formPassword);
 
-  this.formPassword = this.fb.group({
-    password: ['', [Validators.required,]],
-    confirmPassword: ['', [Validators.required]]
-  },
-  {
-    validators:this.Mustmatch('password','confirmPassword')
-  }
-  );
+  this.formPassword.controls['password'].addValidators([Validators.required])
+  this.formPassword.controls['confirmPassword'].addValidators([Validators.required])
 
-  this.MandaValidazione()
+
+  // this.formPassword = this.fb.group({
+  //   password: ['', [Validators.required,]],
+  //   confirmPassword: ['', [Validators.required]]
+  // },
+  // {
+  //   validators:this.Mustmatch('password','confirmPassword')
+  // }
+  // );
+
+
 
 
 }
@@ -54,9 +57,9 @@ Mustmatch(password:any ,confirmPassword: any ) {
   };
 }
 
-MandaValidazione(){
-  this.validationPassword.emit(this.formPassword)
-}
+
+
+
 
 }
 

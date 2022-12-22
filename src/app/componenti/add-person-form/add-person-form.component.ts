@@ -1,6 +1,7 @@
-import { DatePipe } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup} from '@angular/forms';
+import * as moment from 'moment';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
@@ -11,35 +12,32 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class AddPersonFormComponent implements OnInit {
 
   userForm! : FormGroup;
-  validationBasicInfo! : FormGroup;
-  validationDetails! : FormGroup;
-  validationPassword! : FormGroup;
-  status = true
+  status = false
 
 
   constructor(private fb: FormBuilder, private firebase : FirebaseService){}
 
   ngOnInit(): void {
 
-    this.userForm = new FormGroup({
-      basicInfo : new FormGroup({
-        firstName: new FormControl(''),
-        lastName:  new FormControl(''),
-        email:  new FormControl('')
+    this.userForm = this.fb.group({
+      basicInfo: this.fb.group({
+        firstName: [''],
+        lastName: [''],
+        email: ['']
       }),
-      detailsInfo : new FormGroup({
-        dateBirth:  new FormControl(''),
-        genre:  new FormControl(''),
-        city:  new FormControl(''),
-        district:  new FormControl(''),
-        address:  new FormControl(''),
+      detailsInfo: this.fb.group({
+        dateBirth: [moment()],
+        genre: [''],
+        city: [''],
+        district: [''],
+        address: ['']
       }),
-      passwordRequest : new FormGroup({
-        password: new FormControl(''),
-        confirmPassword: new FormControl(''),
-      }),
+      passwordRequest: this.fb.group({
+        password: [''],
+        confirmPassword: ['']
+      })
 
-    })
+    });
 
 
 
@@ -51,23 +49,15 @@ export class AddPersonFormComponent implements OnInit {
 
   onUpdate(){
 
-   console.log( this.validationBasicInfo.controls['firstName'].value);
+    if (this.userForm.valid) {
 
-
-    if (this.validationBasicInfo.valid &&
-      this.validationDetails.valid     &&
-      this.validationPassword.valid) {
-
-        this.firebase.insertPersona(this.firebase.urlPerson + '.json', {
-          basicInfo: this.validationBasicInfo.value,
-          detailsInfo: this.validationDetails.value,
-          passwordRequest: this.validationPassword.value
-        }).subscribe((data) => {
+        this.firebase.insertPersona(this.firebase.urlPerson + '.json', this.userForm.value).subscribe((data) => {
           console.log(data);
 
         });
 
         this.status = true
+        this.userForm.reset()
 
     } else {
       this.status = false
@@ -79,27 +69,8 @@ export class AddPersonFormComponent implements OnInit {
   }
 
 
-  RiceviValidazione(value : FormGroup){
-  this.validationBasicInfo = value
 
 
-  }
 
-  RiceviValidazioneDetails(value : FormGroup){
-    this.validationDetails = value
-
-  }
-
-  RiceviValidazionePassword(value : FormGroup){
-    this.validationPassword = value
-
-  }
-
-
-  setForm(){
-    this.userForm.setValue({
-
-    })
-  }
 
 }

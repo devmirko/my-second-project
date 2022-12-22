@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective,  Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormGroupDirective,  Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-basic-info',
@@ -8,29 +8,21 @@ import { FormBuilder, FormControl, FormGroup, FormGroupDirective,  Validators } 
 })
 export class UserBasicInfoComponent implements OnInit {
 @Input() formGroupName!: string
-@Output() Validazione = new EventEmitter();
 formBasic!: FormGroup
   constructor(private rootFormGroup: FormGroupDirective, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.formBasic = this.rootFormGroup.control.get(this.formGroupName) as FormGroup
 
-
-    this.formBasic = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
-      lastName: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['',  [Validators.required, Validators.email]]
-      });
-
-      this.MandaValidazione()
-
+    console.log(this.formBasic)
+    this.formBasic.controls['firstName'].addValidators([Validators.required, Validators.minLength(2)])
+    this.formBasic.controls['lastName'].addValidators([Validators.required, Validators.minLength(2)])
+    this.formBasic.controls['email'].addValidators([Validators.required, Validators.email])
 
 
   }
 
-  MandaValidazione(){
-    this.Validazione.emit(this.formBasic)
-  }
+
 
 
 

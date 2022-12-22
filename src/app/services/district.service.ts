@@ -5,6 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class DistrictService {
 
+   genre = ['Uomo', 'Donna']
+
+
+
    Province = [
      'Agrigento',
      'Alessandria',
@@ -122,6 +126,10 @@ export class DistrictService {
 
   getProvincie(){
     return this.Province
+  }
+
+  getGenre(){
+    return this.genre
   }
 
 

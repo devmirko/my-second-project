@@ -15,7 +15,7 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <div *ngIf="formDetails.get('dateBirth')?.invalid && formDetails.get('dateBirth')?.touched" >
+    <div *ngIf="formDetails.get('dateBirth')?.invalid && formDetails.get('dateBirth')?.touched">
       <p *ngIf="formDetails.get('dateBirth')?.errors?.['required']">Inserisci la data</p>
       <p *ngIf="formDetails.get('dateBirth')?.errors?.['invalid']">Devi essere maggiorenne</p>
     </div>
@@ -24,10 +24,11 @@
     <!-- Select gender -->
     <mat-form-field appearance="fill">
       <mat-label>Genere</mat-label>
-      <select matNativeControl formControlName="genre" >
-        <option value="Man">Uomo</option>
-        <option value="Woman">Donna</option>
-      </select>
+      <mat-select formControlName="genre">
+        <mat-option *ngFor="let gen of genre" [value]="gen">
+          {{gen}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
 

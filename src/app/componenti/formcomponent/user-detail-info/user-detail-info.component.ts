@@ -1,5 +1,5 @@
-import { Component, Input, Output,OnInit, EventEmitter, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Component, Input,OnInit} from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective,Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { DistrictService } from 'src/app/services/district.service';
 
@@ -10,27 +10,20 @@ import { DistrictService } from 'src/app/services/district.service';
 })
 export class UserDetailInfoComponent implements OnInit {
 @Input() formGroupName!: string
-@Output() validationDetails = new EventEmitter();
 formDetails!: FormGroup
 ProvincieItaliane: any
+genre: any
 constructor(private rootFormGroup: FormGroupDirective, private fb: FormBuilder, private provincie: DistrictService) {
   this.ProvincieItaliane = this.provincie.getProvincie()
+  this.genre = this.provincie.getGenre()
 }
 
 ngOnInit(): void {
   this.formDetails = this.rootFormGroup.control.get(this.formGroupName) as FormGroup
   console.log(this.formDetails);
 
-  this.formDetails = this.fb.group({
-    dateBirth: [moment(), [Validators.required, this.ControlDate]],
-    genre: ['', Validators.required],
-    city: [''],
-    district: [''],
-    address: [null]
-  });
-
-
-  this.MandaValidazione()
+  this.formDetails.controls['dateBirth'].addValidators([Validators.required, this.ControlDate])
+  this.formDetails.controls['genre'].addValidators([Validators.required])
 
 }
 
@@ -51,9 +44,7 @@ ControlDate( control: FormControl ){
 
 
 
-MandaValidazione(){
-  this.validationDetails.emit(this.formDetails)
-}
+
 
 
 
