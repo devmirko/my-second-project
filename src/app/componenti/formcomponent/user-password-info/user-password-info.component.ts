@@ -17,49 +17,10 @@ ngOnInit(): void {
 
   this.formPassword.controls['password'].addValidators([Validators.required])
   this.formPassword.controls['confirmPassword'].addValidators([Validators.required])
-
-
-  // this.formPassword = this.fb.group({
-  //   password: ['', [Validators.required,]],
-  //   confirmPassword: ['', [Validators.required]]
-  // },
-  // {
-  //   validators:this.Mustmatch('password','confirmPassword')
-  // }
-  // );
-
-
+   console.log(this.formPassword.controls);
 
 
 }
-
-get password() { return this.formPassword.get('password'); }
-
-get confirmPassword() { return this.formPassword.get('confirmPassword'); }
-
-
-
-Mustmatch(password:any ,confirmPassword: any ) {
-  return (formgroup: FormGroup) => {
-    const passwordcontrol = formgroup.controls[password];
-    const confirmPasswordcontrol = formgroup.controls[confirmPassword];
-
-    if(confirmPasswordcontrol.errors && !confirmPasswordcontrol.errors['Mustmatch'] ){
-      return;
-    }
-
-    if (passwordcontrol.value !== confirmPasswordcontrol.value ) {
-      confirmPasswordcontrol.setErrors({Mustmatch: true})
-    } else {
-      confirmPasswordcontrol.setErrors(null)
-    }
-
-  };
-}
-
-
-
-
 
 }
 

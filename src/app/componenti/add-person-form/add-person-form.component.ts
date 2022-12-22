@@ -35,6 +35,8 @@ export class AddPersonFormComponent implements OnInit {
       passwordRequest: this.fb.group({
         password: [''],
         confirmPassword: ['']
+      },{
+        validator : this.Mustmatch("password", "confirmPassword")
       })
 
     });
@@ -67,6 +69,28 @@ export class AddPersonFormComponent implements OnInit {
 
 
   }
+
+
+  Mustmatch(password:any ,confirmPassword: any ) {
+    return (formgroup: FormGroup) => {
+      const passwordcontrol = formgroup.controls[password]
+      const confirmPasswordcontrol = formgroup.controls[confirmPassword];
+
+      if(confirmPasswordcontrol.errors && !confirmPasswordcontrol.errors['Mustmatch'] ){
+        return;
+      }
+
+      if (passwordcontrol.value !== confirmPasswordcontrol.value ) {
+        confirmPasswordcontrol.setErrors({Mustmatch: true})
+      } else {
+        confirmPasswordcontrol.setErrors(null)
+      }
+
+    };
+  }
+
+
+
 
 
 
