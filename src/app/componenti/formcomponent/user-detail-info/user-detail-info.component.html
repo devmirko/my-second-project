@@ -63,5 +63,23 @@
       <input matInput placeholder="Ex. Via Panni"  formControlName="address" />
     </mat-form-field>
     <!-- /Address -->
+
+    <!-- languages -->
+    <div formArrayName="languages">
+      <div *ngFor="let item of getControls(); let i = index">
+        <div [formGroupName]="i">
+          <mat-form-field>
+            <mat-label>lingua</mat-label>
+            <input matInput formControlName="name" placeholder="name" value=""/>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>livello</mat-label>
+            <input matInput formControlName="level" placeholder="level" value=""/>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <!-- /languages -->
   </mat-card>
 </ng-container>

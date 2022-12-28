@@ -30,7 +30,8 @@ export class AddPersonFormComponent implements OnInit {
         genre: [''],
         city: [''],
         district: [''],
-        address: ['']
+        address: [''],
+        languages: this.fb.array([this.initLanguages()])
       }),
       passwordRequest: this.fb.group({
         password: [''],
@@ -88,6 +89,20 @@ export class AddPersonFormComponent implements OnInit {
 
     };
   }
+
+  initLanguages() {
+    return this.fb.group({
+        name: [''],
+        level: ['']
+    });
+}
+
+
+
+
+
+
+
 
 
 

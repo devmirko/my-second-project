@@ -1,5 +1,5 @@
 import { Component, Input,OnInit} from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective,Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective,Validators, FormArray } from '@angular/forms';
 import * as moment from 'moment';
 import { DistrictService } from 'src/app/services/district.service';
 
@@ -25,6 +25,7 @@ ngOnInit(): void {
   this.formDetails.controls['dateBirth'].addValidators([Validators.required, this.ControlDate])
   this.formDetails.controls['genre'].addValidators([Validators.required])
 
+
 }
 
 
@@ -41,6 +42,15 @@ ControlDate( control: FormControl ){
   }
   return {invalid : true}
 }
+
+getControls() {
+  return (this.formDetails.get('languages') as FormArray).controls;
+}
+
+
+
+
+
 
 
 
