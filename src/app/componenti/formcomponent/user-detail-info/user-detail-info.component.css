@@ -1,0 +1,12 @@
+.button_space{
+margin-bottom: 20px;
+}
+
+.form_language{
+  display: flex;
+  align-items: center;
+}
+
+.button_delete{
+  margin-left: 20px;
+}

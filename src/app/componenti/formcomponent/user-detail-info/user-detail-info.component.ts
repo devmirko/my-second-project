@@ -47,6 +47,23 @@ getControls() {
   return (this.formDetails.get('languages') as FormArray).controls;
 }
 
+addItem(): void {
+
+  const control = this.formDetails.get('languages') as FormArray;
+  control.push(this.fb.group({
+    name: [''],
+    level: ['']
+}))
+
+
+}
+
+onDelete(itemIndex: number) {
+  const control = this.formDetails.get('languages') as FormArray;
+  control.removeAt(itemIndex)
+}
+
+
 
 
 

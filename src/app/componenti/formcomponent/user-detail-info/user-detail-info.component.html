@@ -66,8 +66,13 @@
 
     <!-- languages -->
     <div formArrayName="languages">
+
+      <div class="button_space"><button mat-raised-button
+        type="button"
+        (click)="addItem()">Aggiungi Lingua</button></div>
+
       <div *ngFor="let item of getControls(); let i = index">
-        <div [formGroupName]="i">
+        <div [formGroupName]="i" class="form_language">
           <mat-form-field>
             <mat-label>lingua</mat-label>
             <input matInput formControlName="name" placeholder="name" value=""/>
@@ -76,6 +81,11 @@
             <mat-label>livello</mat-label>
             <input matInput formControlName="level" placeholder="level" value=""/>
           </mat-form-field>
+
+          <div class="button_delete"><button mat-raised-button color="warn"
+            type="button"
+            (click)="onDelete(i)">Elimina</button></div>
+
         </div>
       </div>
     </div>
